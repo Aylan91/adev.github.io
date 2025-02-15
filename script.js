@@ -1,19 +1,19 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const projects = document.querySelectorAll(".project");
-    projects.forEach(project => {
-        project.addEventListener("click", function() {
-            alert("Vous avez cliqué sur " + this.querySelector("h3").innerText);
-        });
+// Scroll animations with GSAP
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.utils.toArray(".section").forEach(section => {
+        gsap.fromTo(section, 
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", scrollTrigger: section }
+        );
     });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('nav ul li a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            document.getElementById(targetId).scrollIntoView({
-                behavior: 'smooth'
-            });
+    // Hover effect on projects
+    document.querySelectorAll(".project").forEach(project => {
+        project.addEventListener("mouseenter", () => {
+            gsap.to(project, { scale: 1.1, duration: 0.3 });
+        });
+        project.addEventListener("mouseleave", () => {
+            gsap.to(project, { scale: 1, duration: 0.3 });
         });
     });
 });
